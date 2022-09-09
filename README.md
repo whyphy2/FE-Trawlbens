@@ -1,22 +1,10 @@
 # PROJECT TO TES FRONT-END PT TRAWLBENS TEKNOLOGI ANAK INDONESIA
 
-## API Spec
+## Insttalation
 
-* [Article](Dokumentasi/02-article.md)
+* In your directory open with CMD/Git Bash. 
+* Clone the https://github.com/whyphy2/FE-Trawlbens.git.
+* change directory to FE-Trawlbens
+* run (npm insstall)
+* and run npm start
 
-## Route Mapping
-
-| CodeIgniter                                               | HTTP Method |
-| --------------------------------------------------------- | :---------- |
-| `/`                                                       | GET         |
-| `/posting`                                                | POST        |
-| `/update/{id}`                                            | PUT         |
-| `/delete/{id}`                                            | DELETE      |
-
-## POSTMAN
-Pengujian menggunakan POSTMAN 
-silahkan import POSTMAN yang sudah di buat.
-[Import HERE](Development.postman_collection.json) 
-
-## AFTER MIGRATE DATABASE
-setelah migrate database input data pada table post_type karena tidak membuat backend untuk menginput table tersebut
