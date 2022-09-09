@@ -10,19 +10,23 @@ import CastList from './CastList';
 
 import Button, { OutlineButton } from '../../components/button/Button';
 import Modal, { ModalContent } from '../../components/modal/Modal';
-import Input from '../../components/input/Input'
+import Input from '../../components/input/Input';
+
+import Loading from '../../components/Loading/Loading';
 
 const Detail = () => {
 
     const { category, id } = useParams();
 
     const [item, setItem] = useState(null);
-
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         const getDetail = async () => {
+            setLoading(true)
             const response = await requestApi.detail(category, id, {params:{}});
             setItem(response);
             window.scrollTo(0,0);
+            setLoading(false)
         }
         getDetail();
     }, [category, id]);
@@ -38,7 +42,8 @@ const Detail = () => {
     }
 
     return (
-        <>
+        
+            loading ? <Loading/> :<>
             {
                 item && (
                     <>
@@ -79,7 +84,8 @@ const Detail = () => {
                     </>
                 )
             }
-        </>
+                </>
+        
     );
 }
 
@@ -91,7 +97,7 @@ const TrailerModel = props => {
     return (
         <Modal active={false} id={`modal_${item.id}`}>
             <ModalContent onClose={onClose}>
-                <div ref={ref} width="50%" height="500px" title="Kepo">
+                <div ref={ref} width="20%" height="50px" title="Rate">
                     <MovieRate items={item} />
                 </div>
             </ModalContent>
@@ -106,7 +112,6 @@ const MovieRate = props => {
     const history = useHistory();
     
     const items = props.items
-    // console.log(items);
     const [keyword, setKeyword] = useState(props.keyword ? props.keyword : '');
 
     const goToPostRate = async () => {
@@ -114,7 +119,6 @@ const MovieRate = props => {
                 const postData = await requestApi.postRate(items.id, keyword);
                 console.log(postData);
                 history.push(`/rate`);
-                // <Link to="/rate" />
             }
         };
 

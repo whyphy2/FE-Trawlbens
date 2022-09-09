@@ -21,8 +21,8 @@ const MovieCard = props => {
     const gotoDelete = async () => {
         const response = await requestApi.deleteMyRate(item.id)
         console.log(response)
-        history.push(`/rate`);
-
+        // history.push(`/rate`);
+        window.location.reload();
     };
 
     return (

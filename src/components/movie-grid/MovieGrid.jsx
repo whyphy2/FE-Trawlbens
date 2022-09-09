@@ -6,11 +6,13 @@ import './movie-grid.scss';
 import MovieCard from '../movie-card/MovieCard';
 import Button, { OutlineButton } from '../button/Button';
 import Input from '../input/Input'
-
+import Loading from '../Loading/Loading';
 import requestApi, { category, movieType } from '../../api/requestApi';
+
 
 const MovieGrid = props => {
 
+    const [loading, setLoading] = useState(false);
     const [items, setItems] = useState([]);
 
     const [page, setPage] = useState(1);
@@ -20,6 +22,7 @@ const MovieGrid = props => {
 
     useEffect(() => {
         const getList = async () => {
+            setLoading(true);
             let response = null;
             if (keyword === undefined) {
                 const params = {};
@@ -31,6 +34,7 @@ const MovieGrid = props => {
                         response = await requestApi.getMyRate();
                         break;
                 }
+                
             } else {
                 const params = {
                     query: keyword
@@ -39,6 +43,7 @@ const MovieGrid = props => {
             }
             setItems(response.results);
             setTotalPage(response.total_pages);
+            setLoading(false)
         }
         getList();
     }, [props.category, keyword]);
@@ -69,7 +74,8 @@ const MovieGrid = props => {
     }
 
     return (
-        <>
+        
+            loading ? <Loading/> : <>
             <div className="section mb-3">
               {  props.category === "movie" ? <MovieSearch category={props.category} keyword={keyword}/> : ""}
             </div>
@@ -85,7 +91,8 @@ const MovieGrid = props => {
                     </div>
                 ) : null
             }
-        </>
+            </>
+
     );
 }
 

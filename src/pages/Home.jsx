@@ -12,7 +12,6 @@ import { category, movieType } from '../api/requestApi';
 const Home = () => {
     return (
         <>
-        
             <HeroSlide/>
             <div className="container">
                 <div className="section mb-3">
